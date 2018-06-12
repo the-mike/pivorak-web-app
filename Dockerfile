@@ -1,16 +1,10 @@
-FROM ruby:2.3.1-alpine as builder
+FROM be-builder:0.0.1-ruby-2.3.1 as builder
 
 WORKDIR /usr/local/src
-RUN apk add --update build-base postgresql-dev git --virtual .app-builddeps && gem install bundler
-COPY Gemfile* ./
 COPY ./components ./components
 RUN bundle install
 
-FROM ruby:2.3.1-alpine as runtime
 
-WORKDIR /usr/local/src
-RUN apk add --update tzdata libpq --virtual .app-rundeps
-COPY --from=builder /usr/local/bundle /usr/local/bundle
-COPY . ./
-RUN bundle install --local
+FROM be-runtime:0.0.1-ruby-2.3.1 as runtime
+RUN apk add libpq
 CMD ['rails', 's']
