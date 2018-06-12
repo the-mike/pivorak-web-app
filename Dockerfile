@@ -1,10 +1,11 @@
 FROM ruby:2.3.1-alpine
 
-RUN apk add --update build-base postgresql-dev tzdata git && gem install bundler
 WORKDIR /usr/local/src
 COPY Gemfile* ./
 COPY ./components ./components
-RUN bundle install
+RUN apk add --update build-base postgresql-dev git --virtual .app-builddeps && gem install bundler \
+  && bundle install \
+  && apk add tzdata libpq --virtual .app-rundeps && apk del .app-builddeps
 
 COPY . ./
 CMD ['rails', 's']
