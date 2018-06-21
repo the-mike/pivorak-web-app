@@ -6,5 +6,5 @@ RUN bundle install
 
 
 FROM be-runtime:0.0.1-ruby-2.3.1 as runtime
-RUN apk add libpq
+RUN apk add libpq nodejs
 CMD ['rails', 's']
