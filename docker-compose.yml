@@ -3,7 +3,7 @@ version: '3.6'
 services:
   app:
     build: .
-    image: pivorak-full
+    image: pivorak-multistage
     depends_on:
       - db
     volumes:
