@@ -4,3 +4,13 @@ services:
   app:
     build: .
     image: pivorak-full
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/local/src
+    env_file:
+      - environment.docker
+  db:
+    image: postgres:9-alpine
+    env_file:
+      - environment.docker
