@@ -31,4 +31,3 @@ config/settings.yml
 dump.rdb
 public/uploads
 lib/tasks/import_users/pivorakers_list.csv
-environment.docker
