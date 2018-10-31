@@ -9,7 +9,7 @@ RUN bundle install
 FROM ruby:2.3.1-alpine as runtime
 
 WORKDIR /usr/local/src
-RUN apk add --update tzdata libpq nodejs --virtual .app-rundeps
+RUN apk add --update tzdata libpq nodejs postgresql-client --virtual .app-rundeps
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY . ./
 RUN bundle install --local
