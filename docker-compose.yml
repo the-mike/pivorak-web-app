@@ -6,8 +6,6 @@ services:
     image: pivorak-multistage
     depends_on:
       - db
-    volumes:
-      - .:/usr/local/src
     env_file:
       - environment.docker
   db:
